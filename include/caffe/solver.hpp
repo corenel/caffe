@@ -73,6 +73,7 @@ class Solver {
     return test_nets_;
   }
   int iter() const { return iter_; }
+  void set_iter(int new_iter) { iter_ = new_iter; }
 
   // Invoked at specific points during an iteration
   class Callback {
@@ -94,12 +95,12 @@ class Solver {
    */
   virtual inline const char* type() const { return ""; }
 
- protected:
   // Make and apply the update value for the current iteration.
   virtual void ApplyUpdate() = 0;
   string SnapshotFilename(const string extension);
   string SnapshotToBinaryProto();
   string SnapshotToHDF5();
+ protected:
   // The test routine
   void TestAll();
   void Test(const int test_net_id = 0);
